@@ -8,33 +8,36 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "categories")
-public class Category {
+public class Category extends Abstract {
 
 	@Column(name = "category_name")
-	private String category_name;
+	private String categoryName;
 
 	@Column(name = "category_code")
-	private String category_code;
+	private String categoryCode;
 
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+	@JsonBackReference
 	private List<Tag> tags;
 
-	public String getCategory_name() {
-		return category_name;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
-	public String getCategory_code() {
-		return category_code;
+	public String getCategoryCode() {
+		return categoryCode;
 	}
 
-	public void setCategory_code(String category_code) {
-		this.category_code = category_code;
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
 	}
 
 	public List<Tag> getTags() {

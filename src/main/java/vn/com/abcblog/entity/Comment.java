@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "comments")
 public class Comment extends Abstract {
@@ -19,9 +21,10 @@ public class Comment extends Abstract {
 	private Boolean flagDelete;
 
 	@Column(name = "post_id")
-	private Long post_id;
+	private Long postID;
 
 	@OneToMany(mappedBy = "comment", fetch = FetchType.LAZY)
+	@JsonBackReference
 	private List<Post> posts;
 
 	public String getContent() {
@@ -40,12 +43,12 @@ public class Comment extends Abstract {
 		this.flagDelete = flagDelete;
 	}
 
-	public Long getPost_id() {
-		return post_id;
+	public Long getPostID() {
+		return postID;
 	}
 
-	public void setPost_id(Long post_id) {
-		this.post_id = post_id;
+	public void setPostID(Long postID) {
+		this.postID = postID;
 	}
 
 	public List<Post> getPosts() {

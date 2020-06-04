@@ -1,36 +1,26 @@
 package vn.com.abcblog.entity;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import vn.com.abcblog.entity.id.TagID;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "tags")
-public class Tag {
-
-	@EmbeddedId
-	private TagID id;
+public class Tag extends Abstract {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "post_id")
+	@JsonManagedReference
 	private Post post;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
+	@JsonManagedReference
 	private Category category;
-
-	public TagID getId() {
-		return id;
-	}
-
-	public void setId(TagID id) {
-		this.id = id;
-	}
 
 	public Post getPost() {
 		return post;

@@ -10,9 +10,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "posts")
-public class Post {
+public class Post extends Abstract {
 
 	@Column(name = "thumbnail")
 	private String thumbnail;
@@ -27,18 +30,20 @@ public class Post {
 	private String content;
 
 	@Column(name = "post_code")
-	private String post_code;
+	private String postCode;
 
 	@Column(name = "flag_delete")
 	private Boolean flagDelete;
 
 	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+	@JsonBackReference
 	private List<Tag> tags;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "post_id")
+	@JsonManagedReference
 	private Comment comment;
-	
+
 	public String getThumbnail() {
 		return thumbnail;
 	}
@@ -71,12 +76,12 @@ public class Post {
 		this.content = content;
 	}
 
-	public String getPost_code() {
-		return post_code;
+	public String getPostCode() {
+		return postCode;
 	}
 
-	public void setPost_code(String post_code) {
-		this.post_code = post_code;
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
 	}
 
 	public Boolean getFlagDelete() {
@@ -93,6 +98,14 @@ public class Post {
 
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
+	}
+
+	public Comment getComment() {
+		return comment;
+	}
+
+	public void setComment(Comment comment) {
+		this.comment = comment;
 	}
 
 }

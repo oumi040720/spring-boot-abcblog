@@ -1,39 +1,17 @@
-package vn.com.abcblog.entity;
+package vn.com.abcblog.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+public class AbstractDTO {
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-@MappedSuperclass
-public abstract class Abstract {
-
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "create_by")
 	private String createBy;
 
-	@Column(name = "modified_by")
 	private String modifiedBy;
 
-	@Column(name = "create_date")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date createDate;
 
-	@Column(name = "modified_date")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date modifiedDate;
 
 	public Long getId() {

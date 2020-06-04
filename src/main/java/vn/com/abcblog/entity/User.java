@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "users")
 public class User extends Abstract {
@@ -43,6 +45,7 @@ public class User extends Abstract {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id")
+	@JsonManagedReference
 	private Role role;
 
 	public String getUsername() {

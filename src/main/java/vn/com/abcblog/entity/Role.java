@@ -8,33 +8,36 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "roles")
 public class Role extends Abstract {
 
 	@Column(name = "role_name")
-	private String role_name;
+	private String roleName;
 
 	@Column(name = "role_code")
-	private String role_code;
+	private String roleCode;
 
 	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
+	@JsonBackReference
 	private List<User> users;
-	
-	public String getRole_name() {
-		return role_name;
+
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setRole_name(String role_name) {
-		this.role_name = role_name;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
-	public String getRole_code() {
-		return role_code;
+	public String getRoleCode() {
+		return roleCode;
 	}
 
-	public void setRole_code(String role_code) {
-		this.role_code = role_code;
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
 	}
 
 	public List<User> getUsers() {
@@ -44,5 +47,5 @@ public class Role extends Abstract {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	
+
 }
