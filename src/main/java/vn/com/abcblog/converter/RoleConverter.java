@@ -1,11 +1,14 @@
 package vn.com.abcblog.converter;
 
+import org.springframework.stereotype.Component;
+
 import vn.com.abcblog.dto.RoleDTO;
 import vn.com.abcblog.entity.Role;
 
+@Component
 public class RoleConverter {
 	
-	public static RoleDTO convertToDTO(Role role) {
+	public RoleDTO convertToDTO(Role role) {
 		RoleDTO dto = new RoleDTO();
 		dto.setId(role.getId());
 		dto.setCreateBy(role.getCreateBy());
@@ -18,7 +21,7 @@ public class RoleConverter {
 		return dto;
 	}
 	
-	public static Role convertToEntity(RoleDTO roleDTO) {
+	public Role convertToEntity(RoleDTO roleDTO) {
 		Role entity = new Role();
 		entity.setId(roleDTO.getId());
 		entity.setCreateBy(roleDTO.getCreateBy());
@@ -31,7 +34,7 @@ public class RoleConverter {
 		return entity;
 	}
 	
-	public static Role convertToEntity(RoleDTO roleDTO, Role entity) {
+	public Role convertToEntity(RoleDTO roleDTO, Role entity) {
 		entity.setId(roleDTO.getId());
 		entity.setCreateBy(roleDTO.getCreateBy());
 		entity.setCreateDate(roleDTO.getCreateDate());

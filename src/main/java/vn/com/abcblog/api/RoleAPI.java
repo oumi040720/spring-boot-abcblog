@@ -31,7 +31,7 @@ public class RoleAPI {
 	}
 
 	@GetMapping(value = "/api/role/role_code/{roleCode}")
-	public RoleDTO findOneByID(@PathVariable("roleCode") String roleCode) {
+	public RoleDTO findOneByRoleCode(@PathVariable("roleCode") String roleCode) {
 		return roleService.findOneByRoleCode(roleCode);
 	}
 

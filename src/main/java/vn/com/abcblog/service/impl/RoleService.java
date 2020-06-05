@@ -19,13 +19,16 @@ public class RoleService implements IRoleService {
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	@Autowired
+	private RoleConverter converter;
+	
 	@Override
 	public List<RoleDTO> findAll() {
 		List<RoleDTO> result = new ArrayList<>();
 		List<Role> roles = roleRepository.findAll();
 		
 		for (Role role : roles) {
-			result.add(RoleConverter.convertToDTO(role));
+			result.add(converter.convertToDTO(role));
 		}
 		
 		return result;
@@ -33,17 +36,17 @@ public class RoleService implements IRoleService {
 
 	@Override
 	public RoleDTO findOneByID(Long id) {
-		return RoleConverter.convertToDTO(roleRepository.getOne(id));
+		return converter.convertToDTO(roleRepository.getOne(id));
 	}
 
 	@Override
 	public RoleDTO findOneByRoleCode(String roleCode) {
-		return RoleConverter.convertToDTO(roleRepository.findByRoleCode(roleCode));
+		return converter.convertToDTO(roleRepository.findByRoleCode(roleCode));
 	}
 
 	@Override
 	public Boolean insert(RoleDTO roleDTO) {
-		Role role = RoleConverter.convertToEntity(roleDTO);
+		Role role = converter.convertToEntity(roleDTO);
 		role.setCreateDate(new Date(System.currentTimeMillis()));
 		role.setModifiedDate(new Date(System.currentTimeMillis()));
 		
@@ -58,7 +61,7 @@ public class RoleService implements IRoleService {
 	@Override
 	public Boolean update(RoleDTO roleDTO) {
 		Role oldRole = roleRepository.getOne(roleDTO.getId());
-		Role newRole = RoleConverter.convertToEntity(roleDTO, oldRole);
+		Role newRole = converter.convertToEntity(roleDTO, oldRole);
 		newRole.setCreateDate(oldRole.getCreateDate());
 		newRole.setModifiedDate(new Date(System.currentTimeMillis()));
 		
