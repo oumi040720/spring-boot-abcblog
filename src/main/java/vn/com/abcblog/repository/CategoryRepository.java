@@ -8,4 +8,6 @@ import vn.com.abcblog.entity.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
+	public Category findByCategoryCode(String categoryCode);
+	
 }

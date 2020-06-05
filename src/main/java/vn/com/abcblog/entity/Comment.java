@@ -1,14 +1,13 @@
 package vn.com.abcblog.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "comments")
@@ -20,12 +19,10 @@ public class Comment extends Abstract {
 	@Column(name = "flag_delete")
 	private Boolean flagDelete;
 
-	@Column(name = "post_id")
-	private Long postID;
-
-	@OneToMany(mappedBy = "comment", fetch = FetchType.LAZY)
-	@JsonBackReference
-	private List<Post> posts;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "post_id")
+	@JsonManagedReference
+	private Post post;
 
 	public String getContent() {
 		return content;
@@ -43,20 +40,12 @@ public class Comment extends Abstract {
 		this.flagDelete = flagDelete;
 	}
 
-	public Long getPostID() {
-		return postID;
+	public Post getPost() {
+		return post;
 	}
 
-	public void setPostID(Long postID) {
-		this.postID = postID;
-	}
-
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 }

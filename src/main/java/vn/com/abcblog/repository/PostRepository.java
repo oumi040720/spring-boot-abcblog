@@ -8,4 +8,6 @@ import vn.com.abcblog.entity.Post;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
+	public Post findByPostCode(String postCode);
+	
 }

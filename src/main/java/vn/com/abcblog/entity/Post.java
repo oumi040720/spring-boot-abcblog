@@ -5,13 +5,10 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "posts")
@@ -39,10 +36,9 @@ public class Post extends Abstract {
 	@JsonBackReference
 	private List<Tag> tags;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "post_id")
-	@JsonManagedReference
-	private Comment comment;
+	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+	@JsonBackReference
+	private List<Comment> comments;
 
 	public String getThumbnail() {
 		return thumbnail;
@@ -100,12 +96,12 @@ public class Post extends Abstract {
 		this.tags = tags;
 	}
 
-	public Comment getComment() {
-		return comment;
+	public List<Comment> getComments() {
+		return comments;
 	}
 
-	public void setComment(Comment comment) {
-		this.comment = comment;
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 }
